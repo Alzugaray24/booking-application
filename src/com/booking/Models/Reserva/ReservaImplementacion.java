@@ -80,31 +80,4 @@ public class ReservaImplementacion implements IReserva {
         }
     }
 
-    public void buscarHabitacion (){
-
-    }
-
-    public Date getHoraDeLlegada() {
-        return horaDeLlegada;
-    }
-
-    public void setHoraDeLlegada(Date horaDeLlegada) {
-        this.horaDeLlegada = horaDeLlegada;
-    }
-
-    public Integer getCantidadHabitaciones() {
-        return cantidadHabitaciones;
-    }
-
-    public void setCantidadHabitaciones(Integer cantidadHabitaciones) {
-        this.cantidadHabitaciones = cantidadHabitaciones;
-    }
-
-    public List<ReservaData> getReservaData() {
-        return reservaData;
-    }
-
-    public void setReservaData(List<ReservaData> reservaData) {
-        this.reservaData = reservaData;
-    }
 }

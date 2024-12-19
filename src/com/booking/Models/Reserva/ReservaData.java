@@ -13,20 +13,12 @@ public class ReservaData<T> {
         this.alojamiento = alojamiento;
     }
 
-    public Cliente getUsuario() {
-        return usuario;
-    }
-
     public void setUsuario(Cliente usuario) {
         this.usuario = usuario;
     }
 
     public T getAlojamiento() {
         return alojamiento;
-    }
-
-    public void setAlojamiento(T alojamiento) {
-        this.alojamiento = alojamiento;
     }
 
     public void mostrarInformacionReserva() {
