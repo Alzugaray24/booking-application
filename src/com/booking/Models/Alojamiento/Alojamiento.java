@@ -35,28 +35,12 @@ public abstract class Alojamiento {
         this.registroReservas = registroReservas;
     }
 
-    public Alojamiento(String nombre, Date fechaFin, Date fechaInicio, Double precioBase, List<Habitacion> habitaciones, String tipoAlojamiento, String ciudad, Float calificacion) {
-    }
 
-    public abstract String decorarAlojamiento();
+    public abstract String decorarAlojamiento(
+    );
 
     public void agregarReserva(ReservaData<?> reserva) {
         this.registroReservas.add(reserva);
-    }
-
-    public void mostrarRegistroReservas() {
-        System.out.println("Registro de Reservas para el Hotel: " + this.getNombre());
-        if (registroReservas.isEmpty()) {
-            System.out.println("No hay reservas realizadas.");
-        } else {
-            for (ReservaData<?> reserva : registroReservas) {
-                reserva.mostrarInformacionReserva();
-            }
-        }
-    }
-
-    public List<ReservaData<?>> getRegistroReservas() {
-        return registroReservas;
     }
 
     public String calcularPrecioTotal(int cantidadHabitaciones) {
@@ -98,7 +82,6 @@ public abstract class Alojamiento {
 
     public void confirmarHabitaciones(List<Habitacion> habitaciones, Date startDate, Date endDate,
                                       int adultos, int ninos, int habitacionesRequeridas) {
-        // Validar los parámetros de entrada
         if (habitaciones == null || habitaciones.isEmpty()) {
             throw new IllegalArgumentException("La lista de habitaciones no puede estar vacía.");
         }
@@ -109,7 +92,6 @@ public abstract class Alojamiento {
             throw new IllegalArgumentException("Los valores de adultos, niños o habitaciones son inválidos.");
         }
 
-        // Filtrar habitaciones disponibles
         List<Habitacion> habitacionesDisponibles = new ArrayList<>();
         for (Habitacion habitacion : habitaciones) {
             if (habitacion.isDisponibilidad() &&
@@ -119,12 +101,10 @@ public abstract class Alojamiento {
             }
         }
 
-        // Verificar si hay suficientes habitaciones disponibles
         if (habitacionesDisponibles.size() < habitacionesRequeridas) {
             throw new IllegalStateException("No hay suficientes habitaciones disponibles para las fechas dadas.");
         }
 
-        // Mostrar información de las habitaciones confirmadas
         System.out.println("Habitaciones confirmadas:");
         for (int i = 0; i < habitacionesRequeridas; i++) {
             Habitacion habitacion = habitacionesDisponibles.get(i);
@@ -157,63 +137,34 @@ public abstract class Alojamiento {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getCiudad() {
         return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
     }
 
     public String getTipoAlojamiento() {
         return tipoAlojamiento;
     }
 
-    public void setTipoAlojamiento(String tipoAlojamiento) {
-        this.tipoAlojamiento = tipoAlojamiento;
-    }
-
     public List<Habitacion> getHabitaciones() {
         return habitaciones;
-    }
-
-    public void setHabitaciones(List<Habitacion> habitaciones) {
-        this.habitaciones = habitaciones;
     }
 
     public Double getPrecioBase() {
         return precioBase;
     }
 
-    public void setPrecioBase(Double precioBase) {
-        this.precioBase = precioBase;
-    }
-
     public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
 
     public Date getFechaFin() {
         return fechaFin;
-    }
-
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
     }
 
     public Float getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(Float calificacion) {
-        this.calificacion = calificacion;
-    }
 }
