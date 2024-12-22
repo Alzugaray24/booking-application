@@ -6,7 +6,6 @@ import com.booking.Models.alojamiento.TipoAlojamiento;
 import com.booking.Models.habitacion.Habitacion;
 import com.booking.Repositories.AlojamientoRespository;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class AlojamientoUtils {
@@ -38,12 +37,15 @@ public class AlojamientoUtils {
     }
 
     public static void mostrarDetallesAlojamiento(Alojamiento alojamiento) {
-        System.out.println("Hotel: " + alojamiento.getNombre());
-        System.out.println("Ciudad: " + alojamiento.getCiudad());
-        System.out.println("Tipo: " + alojamiento.getTipo());
-        System.out.println("Calificación: " + alojamiento.getCalificacion());
-        System.out.println("Precio Base: " + alojamiento.getPrecioBase());
-        System.out.println("Fecha de Inicio: " + alojamiento.getFechaInicio());
-        System.out.println("Fecha de Fin: " + alojamiento.getFechaFin());
+        StringBuilder detalles = new StringBuilder();
+        detalles.append("Hotel: ").append(alojamiento.getNombre()).append("\n")
+                .append("Ciudad: ").append(alojamiento.getCiudad()).append("\n")
+                .append("Tipo: ").append(alojamiento.getTipo()).append("\n")
+                .append("Calificación: ").append(alojamiento.getCalificacion()).append("\n")
+                .append("Precio Base: ").append(alojamiento.getPrecioBase()).append("\n")
+                .append("Fecha de Inicio: ").append(alojamiento.getFechaInicio()).append("\n")
+                .append("Fecha de Fin: ").append(alojamiento.getFechaFin()).append("\n");
+
+        System.out.println(detalles.toString());
     }
 }

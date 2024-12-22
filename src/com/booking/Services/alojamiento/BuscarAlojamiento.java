@@ -4,13 +4,13 @@ import com.booking.Models.alojamiento.Alojamiento;
 import com.booking.Models.alojamiento.TipoAlojamiento;
 import com.booking.Repositories.AlojamientoRespository;
 import com.booking.Services.interfaces.ICommand;
+import com.booking.utils.BuscarAlojamientoUtils;
 import com.booking.utils.ConsoleDateUtils;
 import com.booking.utils.ConsoleIntegerUtils;
 import com.booking.utils.ConsoleStringUtils;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BuscarAlojamiento implements ICommand<List<Alojamiento>> {
 
@@ -28,35 +28,58 @@ public class BuscarAlojamiento implements ICommand<List<Alojamiento>> {
 
     @Override
     public List<Alojamiento> execute() {
-        String nombre = mensajeRecibido.getString("Ingrese el nombre del alojamiento");
-        String ciudad = mensajeRecibido.getString("Ingrese la ciudad");
+        String nombre = obtenerNombre();
+        String ciudad = obtenerCiudad();
+        TipoAlojamiento tipoAlojamiento = obtenerTipoAlojamiento();
+        Date fechaInicio = obtenerFechaInicio();
+        Date fechaFin = obtenerFechaFin();
+        int cantidadAdultos = obtenerCantidadAdultos();
+        int cantidadNinos = obtenerCantidadNinos();
 
-        TipoAlojamiento tipoAlojamiento = TipoAlojamiento.valueOf(mensajeRecibido.getString("Ingrese el tipo de alojamiento (HOTEL, APARTAMENTO, FINCA, DIADESOL)").toUpperCase());
+        List<Alojamiento> alojamientosEncontrados = BuscarAlojamientoUtils.buscarAlojamientos(
+                alojamientos.getAlojamientos(), nombre, ciudad, tipoAlojamiento, fechaInicio, fechaFin, cantidadAdultos, cantidadNinos);
 
+        if (tipoAlojamiento == TipoAlojamiento.DIADESOL) {
+            alojamientosEncontrados = BuscarAlojamientoUtils.buscarAlojamientosDiaDeSol(alojamientos.getAlojamientos());
+        }
 
-        Date fechaInicio = fechaRecibida.getDateAsObject("Ingrese la fecha de inicio del hospedaje (yyyy-MM-dd)", "yyyy-MM-dd");
-        Date fechaFin = fechaRecibida.getDateAsObject("Ingrese la fecha de finalización del hospedaje (yyyy-MM-dd)", "yyyy-MM-dd");
-        int cantidadAdultos = numeroRecibido.getInteger("Ingrese la cantidad de adultos");
-        int cantidadNinos = numeroRecibido.getInteger("Ingrese la cantidad de niños");
+        mostrarPreciosTotales(alojamientosEncontrados, fechaInicio, fechaFin);
 
-        return buscarAlojamientos(nombre, ciudad, tipoAlojamiento, fechaInicio, fechaFin, cantidadAdultos, cantidadNinos);
+        return alojamientosEncontrados;
     }
 
-    private List<Alojamiento> buscarAlojamientos(String nombre, String ciudad, TipoAlojamiento tipoAlojamiento, Date fechaInicio, Date fechaFin, int cantidadAdultos, int cantidadNinos) {
-        return alojamientos.getAlojamientos().stream()
-                .filter(alojamiento -> alojamiento.getNombre().equalsIgnoreCase(nombre))
-                .filter(alojamiento -> alojamiento.getCiudad().equalsIgnoreCase(ciudad))
-                .filter(alojamiento -> alojamiento.getTipo().equals(tipoAlojamiento))
-                .filter(alojamiento -> alojamiento.getFechaInicio().compareTo(fechaInicio) <= 0 && alojamiento.getFechaFin().compareTo(fechaFin) >= 0)
-                .filter(alojamiento -> tieneHabitacionesAdecuadas(alojamiento, cantidadAdultos, cantidadNinos))
-                .collect(Collectors.toList());
+    private String obtenerNombre() {
+        return mensajeRecibido.getString("Ingrese el nombre del alojamiento");
     }
 
-    private boolean tieneHabitacionesAdecuadas(Alojamiento alojamiento, int cantidadAdultos, int cantidadNinos) {
-        long habitacionesAdecuadas = alojamiento.getHabitaciones().stream()
-                .filter(habitacion -> habitacion.getCantidadAdultos() >= cantidadAdultos && habitacion.getCantidadMenores() >= cantidadNinos)
-                .count();
+    private String obtenerCiudad() {
+        return mensajeRecibido.getString("Ingrese la ciudad");
+    }
 
-        return habitacionesAdecuadas > 0;
+    private TipoAlojamiento obtenerTipoAlojamiento() {
+        return TipoAlojamiento.valueOf(mensajeRecibido.getString("Ingrese el tipo de alojamiento (HOTEL, APARTAMENTO, FINCA, DIA_DE_SOL)").toUpperCase());
+    }
+
+    private Date obtenerFechaInicio() {
+        return fechaRecibida.getDateAsObject("Ingrese la fecha de inicio del hospedaje (yyyy-MM-dd)", "yyyy-MM-dd");
+    }
+
+    private Date obtenerFechaFin() {
+        return fechaRecibida.getDateAsObject("Ingrese la fecha de finalización del hospedaje (yyyy-MM-dd)", "yyyy-MM-dd");
+    }
+
+    private int obtenerCantidadAdultos() {
+        return numeroRecibido.getInteger("Ingrese la cantidad de adultos");
+    }
+
+    private int obtenerCantidadNinos() {
+        return numeroRecibido.getInteger("Ingrese la cantidad de niños");
+    }
+
+    private void mostrarPreciosTotales(List<Alojamiento> alojamientosEncontrados, Date fechaInicio, Date fechaFin) {
+        for (Alojamiento alojamiento : alojamientosEncontrados) {
+            double precioTotal = BuscarAlojamientoUtils.calcularPrecioTotal(alojamiento, fechaInicio, fechaFin, 1);
+            System.out.println("Precio total: " + precioTotal);
+        }
     }
 }
