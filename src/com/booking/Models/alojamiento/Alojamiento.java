@@ -1,7 +1,6 @@
 package com.booking.Models.alojamiento;
 
 import com.booking.Models.habitacion.Habitacion;
-import com.booking.Models.reserva.ReservaData;
 
 import java.util.Date;
 import java.util.List;
@@ -11,16 +10,16 @@ public abstract class Alojamiento {
     private String nombre;
     private String ciudad;
     private TipoAlojamiento tipo;
-    private Float precioBase;
+    private Double precioBase;
     private List<Habitacion> habitaciones;
-    private Float calificacion;
+    private Integer calificacion;
     private Date fechaInicio;
     private Date fechaFin;
 
     public Alojamiento() {
     }
 
-    public Alojamiento(String nombre, String ciudad, TipoAlojamiento tipo, Float precioBase, List<Habitacion> habitaciones, Float calificacion, Date fechaInicio, Date fechaFin) {
+    public Alojamiento(String nombre, String ciudad, TipoAlojamiento tipo, Double precioBase, List<Habitacion> habitaciones, Integer calificacion, Date fechaInicio, Date fechaFin) {
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.tipo = tipo;
@@ -55,11 +54,11 @@ public abstract class Alojamiento {
         this.tipo = tipo;
     }
 
-    public Float getPrecioBase() {
+    public Double getPrecioBase() {
         return precioBase;
     }
 
-    public void setPrecioBase(Float precioBase) {
+    public void setPrecioBase(Double precioBase) {
         this.precioBase = precioBase;
     }
 
@@ -71,11 +70,11 @@ public abstract class Alojamiento {
         this.habitaciones = habitaciones;
     }
 
-    public Float getCalificacion() {
+    public Integer getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(Float calificacion) {
+    public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
 

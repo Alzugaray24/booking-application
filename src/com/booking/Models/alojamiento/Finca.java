@@ -12,7 +12,7 @@ public class Finca extends Alojamiento {
 
     }
 
-    public Finca(String nombre, String ciudad, TipoAlojamiento tipo, Float precioBase, List<Habitacion> habitaciones, Float calificacion, Date fechaInicio, Date fechaFin) {
+    public Finca(String nombre, String ciudad, TipoAlojamiento tipo, Double precioBase, List<Habitacion> habitaciones, Integer calificacion, Date fechaInicio, Date fechaFin) {
         super(nombre, ciudad, tipo, precioBase, habitaciones, calificacion, fechaInicio, fechaFin);
     }
 

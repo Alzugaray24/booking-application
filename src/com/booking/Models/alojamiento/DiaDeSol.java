@@ -20,7 +20,7 @@ public class DiaDeSol extends Alojamiento {
     }
 
 
-    public DiaDeSol(String nombre, String ciudad, TipoAlojamiento tipo, Float precioBase, List<Habitacion> habitaciones, Float calificacion, Date fechaInicio, Date fechaFin, Boolean incluyeAlmuerzo, Boolean incluyeRefrigerio) {
+    public DiaDeSol(String nombre, String ciudad, TipoAlojamiento tipo, Double precioBase, List<Habitacion> habitaciones, Integer calificacion, Date fechaInicio, Date fechaFin, Boolean incluyeAlmuerzo, Boolean incluyeRefrigerio) {
         super(nombre, ciudad, tipo, precioBase, habitaciones, calificacion, fechaInicio, fechaFin);
         this.incluyeAlmuerzo = incluyeAlmuerzo;
         this.incluyeRefrigerio = incluyeRefrigerio;

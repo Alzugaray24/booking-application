@@ -5,17 +5,17 @@ import java.util.List;
 public class Habitacion {
 
     private List<String> tipoDeHabitacion;
-    private Float precio;
+    private Double precio;
     private String descripcion;
     private Boolean disponibilidad;
     private Integer cantidadMenores;
     private Integer cantidadAdultos;
-    private Float precioBase;
+    private Double precioBase;
 
     public Habitacion() {
     }
 
-    public Habitacion(List<String> tipoDeHabitacion, Float precio, String descripcion, Boolean disponibilidad, Integer cantidadMenores, Integer cantidadAdultos, Float precioBase) {
+    public Habitacion(List<String> tipoDeHabitacion, Double precio, String descripcion, Boolean disponibilidad, Integer cantidadMenores, Integer cantidadAdultos, Double precioBase) {
         this.tipoDeHabitacion = tipoDeHabitacion;
         this.precio = precio;
         this.descripcion = descripcion;
@@ -44,11 +44,11 @@ public class Habitacion {
         this.tipoDeHabitacion = tipoDeHabitacion;
     }
 
-    public Float getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Float precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
@@ -84,11 +84,11 @@ public class Habitacion {
         this.cantidadAdultos = cantidadAdultos;
     }
 
-    public Float getPrecioBase() {
+    public Double getPrecioBase() {
         return precioBase;
     }
 
-    public void setPrecioBase(Float precioBase) {
+    public void setPrecioBase(Double precioBase) {
         this.precioBase = precioBase;
     }
 }

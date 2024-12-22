@@ -28,23 +28,35 @@ public class BuscarAlojamiento implements ICommand<List<Alojamiento>> {
 
     @Override
     public List<Alojamiento> execute() {
+        String nombre = mensajeRecibido.getString("Ingrese el nombre del alojamiento");
         String ciudad = mensajeRecibido.getString("Ingrese la ciudad");
+
         TipoAlojamiento tipoAlojamiento = TipoAlojamiento.valueOf(mensajeRecibido.getString("Ingrese el tipo de alojamiento (HOTEL, APARTAMENTO, FINCA, DIADESOL)").toUpperCase());
-        Date fechaInicio = new Date(fechaRecibida.getDate("Ingrese la fecha de inicio del hospedaje (yyyy-MM-dd)"));
-        Date fechaFin = new Date(fechaRecibida.getDate("Ingrese la fecha de finalización del hospedaje (yyyy-MM-dd)"));
+
+
+        Date fechaInicio = fechaRecibida.getDateAsObject("Ingrese la fecha de inicio del hospedaje (yyyy-MM-dd)", "yyyy-MM-dd");
+        Date fechaFin = fechaRecibida.getDateAsObject("Ingrese la fecha de finalización del hospedaje (yyyy-MM-dd)", "yyyy-MM-dd");
         int cantidadAdultos = numeroRecibido.getInteger("Ingrese la cantidad de adultos");
         int cantidadNinos = numeroRecibido.getInteger("Ingrese la cantidad de niños");
-        int cantidadHabitaciones = numeroRecibido.getInteger("Ingrese la cantidad de habitaciones");
 
-        return buscarAlojamientos(ciudad, tipoAlojamiento, fechaInicio, fechaFin, cantidadAdultos, cantidadNinos, cantidadHabitaciones);
+        return buscarAlojamientos(nombre, ciudad, tipoAlojamiento, fechaInicio, fechaFin, cantidadAdultos, cantidadNinos);
     }
 
-    private List<Alojamiento> buscarAlojamientos(String ciudad, TipoAlojamiento tipoAlojamiento, Date fechaInicio, Date fechaFin, int cantidadAdultos, int cantidadNinos, int cantidadHabitaciones) {
+    private List<Alojamiento> buscarAlojamientos(String nombre, String ciudad, TipoAlojamiento tipoAlojamiento, Date fechaInicio, Date fechaFin, int cantidadAdultos, int cantidadNinos) {
         return alojamientos.getAlojamientos().stream()
+                .filter(alojamiento -> alojamiento.getNombre().equalsIgnoreCase(nombre))
                 .filter(alojamiento -> alojamiento.getCiudad().equalsIgnoreCase(ciudad))
                 .filter(alojamiento -> alojamiento.getTipo().equals(tipoAlojamiento))
                 .filter(alojamiento -> alojamiento.getFechaInicio().compareTo(fechaInicio) <= 0 && alojamiento.getFechaFin().compareTo(fechaFin) >= 0)
-                .filter(alojamiento -> alojamiento.getHabitaciones().size() >= cantidadHabitaciones)
+                .filter(alojamiento -> tieneHabitacionesAdecuadas(alojamiento, cantidadAdultos, cantidadNinos))
                 .collect(Collectors.toList());
+    }
+
+    private boolean tieneHabitacionesAdecuadas(Alojamiento alojamiento, int cantidadAdultos, int cantidadNinos) {
+        long habitacionesAdecuadas = alojamiento.getHabitaciones().stream()
+                .filter(habitacion -> habitacion.getCantidadAdultos() >= cantidadAdultos && habitacion.getCantidadMenores() >= cantidadNinos)
+                .count();
+
+        return habitacionesAdecuadas > 0;
     }
 }

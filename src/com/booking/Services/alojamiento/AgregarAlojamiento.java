@@ -31,12 +31,11 @@ public class AgregarAlojamiento implements ICommand<Void> {
     @Override
     public Void execute() {
         try {
-            // Recolectar datos del usuario
             String nombre = mensajeRecibido.getString("Ingrese el nombre del hotel");
             String ciudad = mensajeRecibido.getString("Ingrese la ciudad del hotel");
             TipoAlojamiento tipoAlojamiento = obtenerTipoAlojamiento();
-            Float precioBase = numeroRecibido.getFloat("Ingrese el precio base del hotel");
-            Float calificacion = numeroRecibido.getFloat("Ingrese la calificación del hotel");
+            Double precioBase = numeroRecibido.getDouble("Ingrese el precio base del hotel");
+            Integer calificacion = numeroRecibido.getInteger("Ingrese la calificación del hotel");
             Date fechaInicio = fechaRecibida.getDateAsObject("Ingrese la fecha de inicio del hospedaje (yyyy-MM-dd)", "yyyy-MM-dd");
             Date fechaFin = fechaRecibida.getDateAsObject("Ingrese la fecha de finalización del hospedaje (yyyy-MM-dd)", "yyyy-MM-dd");
 
