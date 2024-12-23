@@ -1,10 +1,12 @@
 package com.booking;
 
 import com.booking.Models.alojamiento.Alojamiento;
+import com.booking.Models.habitacion.Habitacion;
 import com.booking.Models.reserva.ReservaImplementacion;
 import com.booking.Repositories.AlojamientoRespository;
 import com.booking.Repositories.ReservaRepository;
 import com.booking.Services.alojamiento.BuscarAlojamiento;
+import com.booking.Services.alojamiento.ConfirmarHabitacion;
 import com.booking.Services.reserva.MostrarReservas;
 import com.booking.Services.reserva.RealizarReserva;
 import com.booking.utils.AlojamientoUtils;
@@ -35,7 +37,7 @@ public class Main {
                     buscarYMostrarAlojamientos(alojamientoRespository);
                 }
                 case 2 -> {
-                    confirmarHabitaciones();
+                    confirmarHabitaciones(alojamientoRespository);
                 }
                 case 3 -> {
                     realizarReserva(reservaRepository);
@@ -75,8 +77,21 @@ public class Main {
         }
     }
 
-    private static void confirmarHabitaciones() {
-        System.out.println("Confirmando habitación... (Por ahora solo se imprimirá un mensaje)");
+    private static void confirmarHabitaciones(AlojamientoRespository alojamientoRespository) {
+        ConsoleStringUtils mensajeRecibido = new ConsoleStringUtils();
+        ConsoleIntegerUtils numeroRecibido = new ConsoleIntegerUtils();
+        ConsoleDateUtils fechaRecibida = new ConsoleDateUtils();
+
+        ConfirmarHabitacion confirmarHabitacion = new ConfirmarHabitacion(
+                alojamientoRespository, mensajeRecibido, numeroRecibido, fechaRecibida);
+
+        try {
+            List<Habitacion> habitacionesConfirmadas = (List<Habitacion>) confirmarHabitacion.execute();
+            System.out.println("Habitaciones confirmadas:");
+            habitacionesConfirmadas.forEach(habitacion -> System.out.println(habitacion.toString()));
+        } catch (Exception e) {
+            System.err.println("Ocurrió un error al confirmar las habitaciones: " + e.getMessage());
+        }
     }
 
     private static void realizarReserva(ReservaRepository reservaRepository) {
