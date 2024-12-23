@@ -1,13 +1,13 @@
 package com.booking.Repositories;
 
-import com.booking.Models.reserva.ReservaData;
+import com.booking.Models.reserva.ReservaImplementacion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaRepository {
     private static ReservaRepository instance;
-    private List<ReservaData> reservas;
+    private List<ReservaImplementacion> reservas;
 
     private ReservaRepository() {
         reservas = new ArrayList<>();
@@ -20,11 +20,11 @@ public class ReservaRepository {
         return instance;
     }
 
-    public List<ReservaData> getReservas() {
+    public List<ReservaImplementacion> getReservas() {
         return reservas;
     }
 
-    public void addReserva(ReservaData reserva) {
+    public void addReserva(ReservaImplementacion reserva) {
         reservas.add(reserva);
     }
 }

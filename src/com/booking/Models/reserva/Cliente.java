@@ -10,20 +10,18 @@ public class Cliente {
     private String numeroDeTelefono;
     private String nacionalidad;
     private LocalDate fechaDeNacimiento;
-    private ReservaData<?> reservaData;
 
     public Cliente() {
     }
 
     public Cliente(String nombre, String apellido, String correo, String numeroDeTelefono,
-                   String nacionalidad, LocalDate fechaDeNacimiento, ReservaData<?> reservaData) {
+                   String nacionalidad, LocalDate fechaDeNacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.numeroDeTelefono = numeroDeTelefono;
         this.nacionalidad = nacionalidad;
         this.fechaDeNacimiento = fechaDeNacimiento;
-        this.reservaData = reservaData;
     }
 
     public String getNombre() {
@@ -74,11 +72,4 @@ public class Cliente {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
-    public ReservaData<?> getReservaData() {
-        return reservaData;
-    }
-
-    public void setReservaData(ReservaData<?> reservaData) {
-        this.reservaData = reservaData;
-    }
 }

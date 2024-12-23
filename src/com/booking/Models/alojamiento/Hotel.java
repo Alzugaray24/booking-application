@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.booking.Models.habitacion.Habitacion;
-import com.booking.Models.reserva.ReservaData;
 
 public class Hotel extends Alojamiento {
 

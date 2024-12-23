@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IReserva {
 
-    public void crearReserva(List<ReservaData> reservaData, Integer cantidadHabitaciones, Date horaDeLlegada);
+    public void crearReserva(List<ReservaImplementacion> reservaData, Integer cantidadHabitaciones, Date horaDeLlegada);
 
     public void eliminarReserva();
 
@@ -15,5 +15,4 @@ public interface IReserva {
 
     public void consultarReserva();
 
-    public void buscarAlojamiento(List<Alojamiento> alojamientos);
 }

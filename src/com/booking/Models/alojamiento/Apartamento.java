@@ -1,7 +1,6 @@
 package com.booking.Models.alojamiento;
 
 import com.booking.Models.habitacion.Habitacion;
-import com.booking.Models.reserva.ReservaData;
 
 import java.util.Date;
 import java.util.List;

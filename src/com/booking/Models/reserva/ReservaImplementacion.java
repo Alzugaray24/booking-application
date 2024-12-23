@@ -8,19 +8,19 @@ import java.util.List;
 public class ReservaImplementacion implements IReserva {
     private Date horaDeLlegada;
     private Integer cantidadHabitaciones;
-    private List<ReservaData> reservaData;
+    private Cliente cliente;
 
     public ReservaImplementacion() {
     }
 
-    public ReservaImplementacion(Date horaDeLlegada, Integer cantidadHabitaciones, List<ReservaData> reservaData) {
+    public ReservaImplementacion(Date horaDeLlegada, Integer cantidadHabitaciones, Cliente cliente) {
         this.horaDeLlegada = horaDeLlegada;
         this.cantidadHabitaciones = cantidadHabitaciones;
-        this.reservaData = reservaData;
+        this.cliente = cliente;
     }
 
     @Override
-    public void crearReserva(List<ReservaData> reservaData, Integer cantidadHabitaciones, Date horaDeLlegada) {
+    public void crearReserva(List<ReservaImplementacion> reservaData, Integer cantidadHabitaciones, Date horaDeLlegada) {
 
     }
 
@@ -34,16 +34,26 @@ public class ReservaImplementacion implements IReserva {
 
     }
 
+
     @Override
     public void consultarReserva() {
 
     }
 
-    @Override
-    public void buscarAlojamiento(List<Alojamiento> alojamientos) {
-
+    public void mostrarReserva() {
+        System.out.println("Hora de llegada: " + horaDeLlegada);
+        System.out.println("Cantidad de habitaciones: " + cantidadHabitaciones);
+        System.out.println("Cliente: " + cliente.getNombre());
     }
 
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public Date getHoraDeLlegada() {
         return horaDeLlegada;
@@ -59,13 +69,5 @@ public class ReservaImplementacion implements IReserva {
 
     public void setCantidadHabitaciones(Integer cantidadHabitaciones) {
         this.cantidadHabitaciones = cantidadHabitaciones;
-    }
-
-    public List<ReservaData> getReservaData() {
-        return reservaData;
-    }
-
-    public void setReservaData(List<ReservaData> reservaData) {
-        this.reservaData = reservaData;
     }
 }
