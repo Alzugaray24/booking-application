@@ -7,6 +7,7 @@ import com.booking.Repositories.AlojamientoRespository;
 import com.booking.Repositories.ReservaRepository;
 import com.booking.Services.alojamiento.BuscarAlojamiento;
 import com.booking.Services.alojamiento.ConfirmarHabitacion;
+import com.booking.Services.reserva.ActualizarReserva;
 import com.booking.Services.reserva.MostrarReservas;
 import com.booking.Services.reserva.RealizarReserva;
 import com.booking.utils.AlojamientoUtils;
@@ -46,7 +47,7 @@ public class Main {
                     mostrarReservas(reservaRepository);
                 }
                 case 5 -> {
-                    System.out.println("Actualizando reserva... (Por ahora solo se imprimirá un mensaje)");
+                    actualizarReserva(reservaRepository);
                 }
                 case 6 -> {
                     System.out.println("¡Hasta luego!");
@@ -124,6 +125,21 @@ public class Main {
             reservas.forEach(reserva -> System.out.println(reserva.toString()));
         } catch (Exception e) {
             System.err.println("Ocurrió un error al mostrar las reservas: " + e.getMessage());
+        }
+    }
+
+    private static void actualizarReserva(ReservaRepository reservaRepository) {
+        ConsoleStringUtils mensajeRecibido = new ConsoleStringUtils();
+        ConsoleDateUtils fechaRecibida = new ConsoleDateUtils();
+
+        ActualizarReserva actualizarReserva = new ActualizarReserva(
+                reservaRepository, mensajeRecibido, fechaRecibida);
+
+        try {
+            String resultado = actualizarReserva.execute();
+            System.out.println(resultado);
+        } catch (Exception e) {
+            System.err.println("Ocurrió un error al actualizar la reserva: " + e.getMessage());
         }
     }
 }

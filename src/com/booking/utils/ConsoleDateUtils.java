@@ -27,16 +27,4 @@ public class ConsoleDateUtils {
             return null;
         }
     }
-
-    public void printFormattedDate(Date date, String format) {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        String formattedDate = sdf.format(date);
-        System.out.println("Fecha formateada: " + formattedDate);
-    }
-
-    public void printDateDifference(Date startDate, Date endDate) {
-        long diffInMillies = endDate.getTime() - startDate.getTime();
-        long diffInDays = diffInMillies / (1000 * 60 * 60 * 24);
-        System.out.println("Diferencia en días: " + diffInDays);
-    }
 }

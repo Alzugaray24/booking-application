@@ -50,4 +50,24 @@ public class ReservaImplementacion implements IReserva {
     public Cliente getCliente() {
         return cliente;
     }
+
+    public Date getHoraDeLlegada() {
+        return horaDeLlegada;
+    }
+
+    public void setHoraDeLlegada(Date horaDeLlegada) {
+        this.horaDeLlegada = horaDeLlegada;
+    }
+
+    public Integer getCantidadHabitaciones() {
+        return cantidadHabitaciones;
+    }
+
+    public void setCantidadHabitaciones(Integer cantidadHabitaciones) {
+        this.cantidadHabitaciones = cantidadHabitaciones;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }
